@@ -16,7 +16,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// stop redirection to test pipeline trigger with commit and push
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
