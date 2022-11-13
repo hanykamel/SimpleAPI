@@ -31,7 +31,20 @@ steps:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
- 
+
+
+- task: DotNetCoreCLI@2
+  displayName: '-configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: 'src/SimpleAPI/SimpleAPI.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifacts'
+
  
 
 
